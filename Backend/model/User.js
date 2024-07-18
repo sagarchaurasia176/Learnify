@@ -21,6 +21,14 @@ const UserDetails = new mongoose.Schema({
     type: String,
     required: true,
   },
+
+  // add this password here 
+  confirmPassword: {
+    type: String,
+    required: true,
+  },
+
+
   accountType: {
     type: String,
     enum: ["Admin", "Student", "Instructor"],
