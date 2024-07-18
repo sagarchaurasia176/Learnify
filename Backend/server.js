@@ -9,5 +9,6 @@ const dbConnectionFunctionCall = require("./config/Edtechdb");
 dbConnectionFunctionCall();
 // routes done
 const routes = require("./routes/EdtechMainRoutes");
-
-
+app.listen(PORT, () => {
+  console.log(`server moving at this ${PORT}`);
+});
