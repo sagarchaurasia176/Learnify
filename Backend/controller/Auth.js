@@ -53,14 +53,13 @@ exports.sendOtp = async (req, res) => {
 };
 
 // user register  controller code apply here
-
- exports.singup = async(req,res)=>{
-    const{fistName, lastName , email , password , confirmPassword} = req.body;
+exports.singup = async (req, res) => {
+  const { fistName, lastName, email, password, confirmPassword } = req.body;
     
-}
 
 
 
+};
 
 //  singup
 // change password

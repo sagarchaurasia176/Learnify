@@ -22,10 +22,12 @@ const UserDetails = new mongoose.Schema({
     required: true,
   },
 
+  // add this password here 
   confirmPassword: {
     type: String,
     required: true,
   },
+
 
   accountType: {
     type: String,
