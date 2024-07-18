@@ -3,7 +3,6 @@ const UserDetails = new mongoose.Schema({
   firstName: {
     type: String,
     required: true,
-
     trim: true,
   },
   lastName: {
@@ -22,12 +21,11 @@ const UserDetails = new mongoose.Schema({
     required: true,
   },
 
-  // add this password here 
+  // add this password here
   confirmPassword: {
     type: String,
     required: true,
   },
-
 
   accountType: {
     type: String,
