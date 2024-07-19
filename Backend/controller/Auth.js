@@ -173,21 +173,49 @@ exports.login = async (req, res) => {
         error: er.message,
       });
     }
-    // password compared first
 
+    // payload apply here for the jwt purposed
+    const payload = {
+      id: checkEmailIfItsExistOrNot._id,
+      email: checkEmailIfItsExistOrNot.email,
+      role: checkEmailIfItsExistOrNot.role,
+    };
+    // password compared first
     const passwordCompared = bcrypt.compare(
-      checkEmailIfItsExistOrNot.password,
-      password
+      password,
+      checkEmailIfItsExistOrNot.password
     );
-    if (!passwordCompared) {
+    if (await passwordCompared) {
+      const token = jwt.sign(payload, process.env.Secret_token, {
+        expiresIn: "2h",
+      });
+      checkEmailIfItsExistOrNot.token = token;
+      checkEmailIfItsExistOrNot.password = undefined;
+      // now start to create the cookies for saved the data
+      // options for cookies
+      const Options = {
+        expires: new Date.now() + 3 * 24 * 60 * 60 * 100,
+        httpOnly: true,
+      };
+
+      res.Cookies("edtech-login-users", token, Options).status(200).json({
+        success: true,
+        token,
+        message: "Cookies stored succesfully !",
+      });
+    } else {
       return res.status(404).json({
         success: false,
-        message: "Password didn't matched !",
+        message: "Incorect password !",
         error: er.message,
       });
     }
-
-    // now start to create the jwt token
+    // stored the data into the db
+    // return response apply there so we get
+    return res.status(200).json({
+      success: true,
+      message: "login Succesfully done",
+    });
 
     // stored the data into the db
     // const loginDataStoredToDb = await
@@ -198,8 +226,22 @@ exports.login = async (req, res) => {
       error: er.message,
     });
   }
-
-  // hash the passwod
 };
 
 // change password
+
+// pending 😔
+
+exports.changePassword = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(404).json({
+        success: false,
+        message: "field is empty !",
+        error: er.message,
+      });
+    }
+  } catch (er) {}
+};
+// check the email
