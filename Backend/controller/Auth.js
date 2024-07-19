@@ -178,7 +178,7 @@ exports.login = async (req, res) => {
     const payload = {
       id: checkEmailIfItsExistOrNot._id,
       email: checkEmailIfItsExistOrNot.email,
-      role: checkEmailIfItsExistOrNot.role,
+      role: checkEmailIfItsExistOrNot.accountType,
     };
     // password compared first
     const passwordCompared = bcrypt.compare(
