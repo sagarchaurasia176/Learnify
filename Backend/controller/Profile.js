@@ -70,22 +70,21 @@ exports.ProfileDeleteAccount = async (req, res) => {
 // how to apply the job - chron job
 
 // userAll details
-exports.getUserDetails = async(req,res){
-    try{
-        const id = req.User.id;
-        const userDetails = await User.findById(id).populate("additionalDetails").exec();
-        //valid 
-        return res.status(200).json({
-            success: true,
-            message: "user data received!",
-            userDetails
-          });
-        //response
-
-    }catch(er){
-        return res.status(400).json({
-            success: false,
-            message: "user details not received !",
-          });
-    }
+exports.getUserDetails = async(req,res) =>{
+  try{
+      const id = req.User.id;
+      const userDetails = await User.findById(id).populate("additionalDetails").exec();
+      //valid 
+      return res.status(200).json({
+          success: true,
+          message: "user data received!",
+          data:userDetails,
+        });
+      //response
+  }catch(er){
+      return res.status(400).json({
+          success: false,
+          message: "user details not received !",
+        });
+  }
 }
