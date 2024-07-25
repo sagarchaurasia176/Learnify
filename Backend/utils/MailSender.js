@@ -14,7 +14,7 @@ const MailSender = async (email, title, body) => {
 
     // MESSAGAE TRANSPORT
     let message = await transporte.sendMail({
-      from: `edtech || codenotion -by edtech`,
+      from: `learnify || codenotion -by edtech`,
       to: `${email}`,
       subject: `${title}`,
       html: `${body}`,
